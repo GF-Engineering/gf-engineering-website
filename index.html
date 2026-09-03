@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GF Engineering — Embedded Electronics &amp; FPGA Engineering</title>
+<meta name="description" content="GF Engineering — embedded electronics and FPGA design for hardware and space/industrial teams. Based in Noordwijkerhout, NL.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#F7F3EC;
+    --surface:#FFFFFF;
+    --ink:#171511;
+    --ink-soft:#3A362E;
+    --muted:#6B6555;
+    --hairline:#E3DDCF;
+    --accent:#E2571F;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    overflow-x:hidden;
+    background:var(--paper);
+    color:var(--ink-soft);
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-image:
+      linear-gradient(var(--hairline) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+  }
+  a{color:var(--accent);}
+  a:hover{color:var(--ink);}
+  img{display:block;max-width:100%;}
+  .mono{font-family:"IBM Plex Mono","SFMono-Regular",Menlo,Consolas,monospace;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 clamp(20px,4vw,56px);}
+
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(247,243,236,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--hairline);}
+  .nav-inner{max-width:1100px;margin:0 auto;padding:16px clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .nav-mark{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--ink);letter-spacing:-0.01em;white-space:nowrap;text-decoration:none;}
+  .nav-mark .dot{width:8px;height:8px;background:var(--accent);flex-shrink:0;}
+  .nav-links{display:flex;gap:24px;flex-wrap:wrap;align-items:center;}
+  .nav-links a{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-cta{border:1px solid var(--ink);color:var(--ink) !important;padding:8px 16px;}
+  .nav-cta:hover{background:var(--ink);color:var(--paper) !important;}
+
+  /* hero */
+  .hero{padding:64px 0 80px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  .eyebrow{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:20px;}
+  .hero h1{
+    font-size:clamp(38px,5vw,58px);
+    line-height:1.05;
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:-0.02em;
+    margin:0;
+    text-wrap:balance;
+  }
+  .hero p{font-size:17px;color:var(--ink-soft);max-width:480px;margin:22px 0 0;line-height:1.6;}
+  .hero-ctas{display:flex;gap:20px;align-items:center;margin-top:34px;flex-wrap:wrap;}
+  .btn{display:inline-block;background:var(--ink);color:var(--paper);font-size:14px;font-weight:700;padding:14px 26px;text-decoration:none;}
+  .btn:hover{background:var(--accent);color:var(--paper);}
+  .link-arrow{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.02em;}
+  .link-arrow:hover{color:var(--accent);}
+  .hero-media{position:relative;margin-left:18px;margin-top:18px;}
+  .hero-media::before{
+    content:"";position:absolute;top:-18px;left:-18px;width:96px;height:96px;background:var(--accent);
+    clip-path:polygon(0 0,100% 0,100% 100%,22px 100%,0 calc(100% - 22px));
+    z-index:0;
+  }
+  .hero-media img{position:relative;z-index:1;width:100%;height:auto;border:1px solid var(--hairline);}
+
+  /* sections */
+  section{padding:80px 0;border-top:1px solid var(--hairline);}
+  .sec-head{display:flex;align-items:baseline;gap:20px;margin-bottom:16px;}
+  .sec-num{font-size:14px;color:var(--accent);font-weight:600;}
+  .sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--ink);letter-spacing:-0.015em;margin:0;text-wrap:balance;}
+  .sec-intro{max-width:600px;font-size:15.5px;color:var(--muted);line-height:1.65;margin:0 0 48px;}
+
+  /* services */
+  .service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);}
+  .service-card{background:var(--surface);padding:32px;}
+  .service-num{font-size:12px;color:var(--muted);}
+  .service-card h3{font-size:19px;font-weight:700;color:var(--ink);margin:10px 0 10px;letter-spacing:-0.005em;}
+  .service-card p{font-size:14px;color:var(--ink-soft);line-height:1.6;margin:0 0 16px;}
+  .service-tools{font-size:11px;color:var(--muted);letter-spacing:0.02em;}
+  .services-note{margin-top:32px;font-size:14px;color:var(--muted);border-left:2px solid var(--accent);padding-left:16px;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;}
+  .about-photo{border:1px solid var(--hairline);}
+  .about-bio p{font-size:16px;color:var(--ink-soft);line-height:1.7;margin:0 0 20px;max-width:560px;}
+  .stack-strip{margin-top:28px;padding-top:20px;border-top:1px solid var(--hairline);}
+  .stack-strip .k{font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .stack-strip .v{font-size:13px;color:var(--ink);}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:48px;align-items:end;}
+  .contact-grid h2{font-size:clamp(28px,4.5vw,42px);font-weight:700;color:var(--ink);letter-spacing:-0.015em;margin:0 0 18px;text-wrap:balance;}
+  .contact-grid > div:first-child p{font-size:16px;color:var(--muted);max-width:440px;line-height:1.6;margin:0;}
+  .contact-card{border:1px solid var(--hairline);background:var(--surface);padding:28px;}
+  .contact-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--hairline);}
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row .k{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);width:88px;flex-shrink:0;}
+  .contact-row .v{font-size:14px;color:var(--ink);text-decoration:none;font-weight:600;}
+  .contact-row .v:hover{color:var(--accent);}
+
+  footer{padding:36px 0 56px;}
+  .foot-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;}
+  .foot-row .l{font-size:12px;color:var(--muted);}
+  .foot-row .r{font-size:11px;color:var(--muted);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-media{order:-1;max-width:420px;}
+    .service-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo{max-width:240px;}
+    .contact-grid{grid-template-columns:1fr;gap:32px;}
+  }
+  @media (max-width:520px){
+    .nav-links{gap:16px;}
+    .nav-cta{padding:7px 12px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-mark" href="#top"><span class="dot"></span>GF Engineering</a>
+    <div class="nav-links mono">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-cta" href="mailto:gonzalo.fernandez@gfengineering.nl">Email</a>
+    </div>
+  </div>
+</nav>
+
+<div id="top" class="wrap">
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Independent Consultancy — Noordwijkerhout, NL</div>
+        <h1>Embedded electronics and FPGA design, delivered end to end.</h1>
+        <p>GF Engineering takes a board or an FPGA from architecture through bring-up and validation — as a fixed-scope build, or as hands-on support inside your team.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="mailto:gonzalo.fernandez@gfengineering.nl">Start a project</a>
+          <a class="link-arrow" href="#services">See what we do ↓</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="images/hero-bench.jpg" alt="Probing a Xilinx Kria FPGA module on the bench, oscilloscope in the background">
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="sec-head"><span class="sec-num mono">01</span><h2>What We Do</h2></div>
+    <p class="sec-intro">Engaged for a single phase, or end to end from requirements through validated hardware.</p>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-num mono">01</div>
+        <h3>Hardware &amp; PCB Design</h3>
+        <p>High-speed, multilayer, mixed-signal boards — engineered SI/PI/EMC-aware from the first schematic.</p>
+        <div class="service-tools mono">Altium · OrCAD · Allegro · KiCad · HyperLynx</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num mono">02</div>
+        <h3>FPGA &amp; SoC Design</h3>
+        <p>VHDL design across Xilinx and Microsemi platforms — from Zynq and Kria SoMs to ProASIC and PolarFire.</p>
+        <div class="service-tools mono">Vivado · Vitis · PetaLinux · Libero · ModelSim</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num mono">03</div>
+        <h3>Prototyping &amp; Integration</h3>
+        <p>BOM and procurement, assembly, and the fixtures needed to bring a first board to life.</p>
+        <div class="service-tools mono">3D-printed fixtures · bring-up · BOM sourcing</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num mono">04</div>
+        <h3>Test, Validation &amp; Debug</h3>
+        <p>A fully equipped lab — scopes, spectrum analyzer, protocol analyzers — with automated test.</p>
+        <div class="service-tools mono">LabVIEW · Python · automated test</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-head"><span class="sec-num mono">02</span><h2>About</h2></div>
+    <div class="about-grid">
+      <img class="about-photo" src="images/about-portrait.jpg" alt="Gonzalo Fernandez at his electronics bench">
+      <div class="about-bio">
+        <p>Gonzalo Fernandez founded GF Engineering after more than a decade as a senior embedded systems and FPGA engineer across the European space and high-tech industrial sectors.</p>
+        <p>Based in Noordwijkerhout — minutes from ESA's ESTEC — GF Engineering brings that same rigor to hardware and FPGA work for teams who need it done right the first time.</p>
+        <div class="stack-strip">
+          <div class="k mono">Stack</div>
+          <div class="v mono">VHDL · Vivado · Zynq / Kria SoM · Altium · HyperLynx · LabVIEW</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head"><span class="sec-num mono">03</span><h2>Contact</h2></div>
+    <div class="contact-grid">
+      <div>
+        <h2>Let's talk about your board.</h2>
+        <p>Email directly with a short brief — scope, timeline, and what stage the project is at. Replies within a day or two.</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-row">
+          <span class="k mono">Email</span>
+          <a class="v" href="mailto:gonzalo.fernandez@gfengineering.nl">gonzalo.fernandez@gfengineering.nl</a>
+        </div>
+        <div class="contact-row">
+          <span class="k mono">Location</span>
+          <span class="v" style="cursor:default;">Noordwijkerhout, NL</span>
+        </div>
+        <div class="contact-row">
+          <span class="k mono">LinkedIn</span>
+          <a class="v" href="https://linkedin.com/in/gonzalofdz" target="_blank" rel="noopener">linkedin.com/in/gonzalofdz</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-row mono">
+      <span class="l">GF Engineering — Noordwijkerhout, NL</span>
+      <span class="r">gfengineering.nl</span>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
