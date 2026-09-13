@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GF Engineering — Embedded Electronics &amp; FPGA Engineering</title>
-<meta name="description" content="GF Engineering — embedded electronics and FPGA design for hardware and space/industrial teams. Based in Noordwijkerhout, NL.">
+<meta name="description" content="GF Engineering — embedded electronics, FPGA and high-speed PCB design for industrial and space applications. Based in Noordwijkerhout, NL.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
@@ -15,20 +15,17 @@
     --muted:#6B6555;
     --hairline:#E3DDCF;
     --accent:#E2571F;
+    --on-ink:#FFFFFF;
+    --on-ink-muted:#C9C2AF;
+    --on-ink-hairline:rgba(255,255,255,0.14);
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    overflow-x:hidden;
     background:var(--paper);
     color:var(--ink-soft);
     font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-image:
-      linear-gradient(var(--hairline) 1px, transparent 1px),
-      linear-gradient(90deg, var(--hairline) 1px, transparent 1px);
-    background-size: 32px 32px;
-    background-position: -1px -1px;
   }
   a{color:var(--accent);}
   a:hover{color:var(--ink);}
@@ -37,79 +34,87 @@
   .wrap{max-width:1100px;margin:0 auto;padding:0 clamp(20px,4vw,56px);}
 
   /* nav */
-  .nav{position:sticky;top:0;z-index:20;background:rgba(247,243,236,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--hairline);}
-  .nav-inner{max-width:1100px;margin:0 auto;padding:16px clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-  .nav-mark{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--ink);letter-spacing:-0.01em;white-space:nowrap;text-decoration:none;}
-  .nav-mark .dot{width:8px;height:8px;background:var(--accent);flex-shrink:0;}
-  .nav-links{display:flex;gap:24px;flex-wrap:wrap;align-items:center;}
+  .nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--hairline);}
+  .nav-inner{max-width:1100px;margin:0 auto;padding:22px clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .nav-mark{display:flex;align-items:center;gap:11px;font-weight:800;font-size:24px;color:var(--ink);letter-spacing:-0.015em;white-space:nowrap;text-decoration:none;}
+  .nav-mark .dot{width:11px;height:11px;background:var(--accent);flex-shrink:0;}
+  .nav-links{display:flex;gap:26px;flex-wrap:wrap;align-items:center;}
   .nav-links a{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
   .nav-links a:hover{color:var(--accent);}
   .nav-cta{border:1px solid var(--ink);color:var(--ink) !important;padding:8px 16px;}
   .nav-cta:hover{background:var(--ink);color:var(--paper) !important;}
 
   /* hero */
-  .hero{padding:64px 0 80px;}
+  .hero{padding:68px 0 84px;}
   .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
   .eyebrow{font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:20px;}
   .hero h1{
-    font-size:clamp(38px,5vw,58px);
-    line-height:1.05;
+    font-size:clamp(34px,4.6vw,50px);
+    line-height:1.12;
     font-weight:700;
     color:var(--ink);
-    letter-spacing:-0.02em;
+    letter-spacing:-0.015em;
     margin:0;
-    text-wrap:balance;
   }
   .hero p{font-size:17px;color:var(--ink-soft);max-width:480px;margin:22px 0 0;line-height:1.6;}
   .hero-ctas{display:flex;gap:20px;align-items:center;margin-top:34px;flex-wrap:wrap;}
   .btn{display:inline-block;background:var(--ink);color:var(--paper);font-size:14px;font-weight:700;padding:14px 26px;text-decoration:none;}
   .btn:hover{background:var(--accent);color:var(--paper);}
-  .link-arrow{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.02em;}
-  .link-arrow:hover{color:var(--accent);}
-  .hero-media{position:relative;margin-left:18px;margin-top:18px;}
-  .hero-media::before{
-    content:"";position:absolute;top:-18px;left:-18px;width:96px;height:96px;background:var(--accent);
-    clip-path:polygon(0 0,100% 0,100% 100%,22px 100%,0 calc(100% - 22px));
-    z-index:0;
-  }
-  .hero-media img{position:relative;z-index:1;width:100%;height:auto;border:1px solid var(--hairline);}
+  .hero-media img{width:100%;height:auto;border:1px solid var(--hairline);}
 
-  /* sections */
+  /* sections (light) */
   section{padding:80px 0;border-top:1px solid var(--hairline);}
-  .sec-head{display:flex;align-items:baseline;gap:20px;margin-bottom:16px;}
-  .sec-num{font-size:14px;color:var(--accent);font-weight:600;}
-  .sec-head h2{font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--ink);letter-spacing:-0.015em;margin:0;text-wrap:balance;}
+  .sec-head{margin-bottom:16px;}
+  .sec-head h2{font-size:clamp(28px,3.8vw,40px);font-weight:700;color:var(--ink);letter-spacing:-0.015em;margin:0;}
   .sec-intro{max-width:600px;font-size:15.5px;color:var(--muted);line-height:1.65;margin:0 0 48px;}
 
+  /* dark section variant */
+  .section-dark{background:var(--ink);border-top:1px solid var(--on-ink-hairline);}
+  .section-dark .sec-head h2{color:var(--on-ink);}
+  .section-dark .sec-intro{color:var(--on-ink-muted);}
+
   /* services */
+  .services-layout{display:grid;grid-template-columns:1fr 260px;gap:40px;align-items:start;}
   .service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--hairline);border:1px solid var(--hairline);}
-  .service-card{background:var(--surface);padding:32px;}
-  .service-num{font-size:12px;color:var(--muted);}
-  .service-card h3{font-size:19px;font-weight:700;color:var(--ink);margin:10px 0 10px;letter-spacing:-0.005em;}
-  .service-card p{font-size:14px;color:var(--ink-soft);line-height:1.6;margin:0 0 16px;}
+  .service-card{background:var(--surface);padding:28px;}
+  .service-card h3{font-size:16.5px;font-weight:700;color:var(--ink);margin:0 0 12px;letter-spacing:-0.005em;}
+  .service-card ul{margin:0 0 14px;padding-left:16px;}
+  .service-card li{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:5px;}
   .service-tools{font-size:11px;color:var(--muted);letter-spacing:0.02em;}
-  .services-note{margin-top:32px;font-size:14px;color:var(--muted);border-left:2px solid var(--accent);padding-left:16px;}
+  .services-photo{border:1px solid var(--hairline);align-self:stretch;object-fit:cover;height:100%;min-height:200px;}
+
+  /* process (dark) */
+  .process-note{max-width:640px;font-size:15px;color:var(--on-ink-muted);line-height:1.65;margin:0 0 40px;}
+  .process-note ul{padding-left:18px;margin:14px 0 0;}
+  .process-note li{margin-bottom:6px;}
+  .process-flow{display:flex;flex-wrap:wrap;gap:0;align-items:stretch;border:1px solid var(--on-ink-hairline);}
+  .process-step{flex:1 1 160px;padding:20px 18px;border-right:1px solid var(--on-ink-hairline);border-bottom:1px solid var(--on-ink-hairline);}
+  .process-step:last-child{border-right:none;}
+  .process-step .t{font-size:13px;color:var(--on-ink);font-weight:600;line-height:1.4;}
+  .process-step .t::before{content:"— ";color:var(--accent);}
 
   /* about */
-  .about-grid{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;}
+  .about-grid{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;}
   .about-photo{border:1px solid var(--hairline);}
   .about-bio p{font-size:16px;color:var(--ink-soft);line-height:1.7;margin:0 0 20px;max-width:560px;}
-  .stack-strip{margin-top:28px;padding-top:20px;border-top:1px solid var(--hairline);}
-  .stack-strip .k{font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-  .stack-strip .v{font-size:13px;color:var(--ink);}
+  .timeline{margin-top:8px;border-top:1px solid var(--hairline);}
+  .timeline-row{display:flex;gap:20px;padding:12px 0;border-bottom:1px solid var(--hairline);align-items:baseline;}
+  .timeline-row .yr{font-size:12px;color:var(--muted);width:92px;flex-shrink:0;}
+  .timeline-row .role{font-size:14px;color:var(--ink);font-weight:600;}
+  .timeline-row .org{font-size:13px;color:var(--muted);}
 
-  /* contact */
+  /* contact (dark) */
   .contact-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:48px;align-items:end;}
-  .contact-grid h2{font-size:clamp(28px,4.5vw,42px);font-weight:700;color:var(--ink);letter-spacing:-0.015em;margin:0 0 18px;text-wrap:balance;}
-  .contact-grid > div:first-child p{font-size:16px;color:var(--muted);max-width:440px;line-height:1.6;margin:0;}
-  .contact-card{border:1px solid var(--hairline);background:var(--surface);padding:28px;}
-  .contact-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--hairline);}
+  .contact-grid h2{font-size:clamp(28px,4vw,40px);font-weight:700;color:var(--on-ink);letter-spacing:-0.015em;margin:0 0 18px;}
+  .contact-grid > div:first-child p{font-size:16px;color:var(--on-ink-muted);max-width:440px;line-height:1.6;margin:0;}
+  .contact-card{border:1px solid var(--on-ink-hairline);padding:28px;}
+  .contact-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--on-ink-hairline);}
   .contact-row:last-child{border-bottom:none;}
-  .contact-row .k{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);width:88px;flex-shrink:0;}
-  .contact-row .v{font-size:14px;color:var(--ink);text-decoration:none;font-weight:600;}
+  .contact-row .k{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--on-ink-muted);width:88px;flex-shrink:0;}
+  .contact-row .v{font-size:14px;color:var(--on-ink);text-decoration:none;font-weight:600;}
   .contact-row .v:hover{color:var(--accent);}
 
-  footer{padding:36px 0 56px;}
+  footer{padding:36px 0 56px;background:var(--paper);}
   .foot-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px;}
   .foot-row .l{font-size:12px;color:var(--muted);}
   .foot-row .r{font-size:11px;color:var(--muted);}
@@ -117,6 +122,8 @@
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr;}
     .hero-media{order:-1;max-width:420px;}
+    .services-layout{grid-template-columns:1fr;}
+    .services-photo{height:220px;min-height:0;}
     .service-grid{grid-template-columns:1fr;}
     .about-grid{grid-template-columns:1fr;}
     .about-photo{max-width:240px;}
@@ -132,7 +139,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-mark" href="#top"><span class="dot"></span>GF Engineering</a>
+    <a class="nav-mark" href="#top"><span class="dot"></span>GF ENGINEERING</a>
     <div class="nav-links mono">
       <a href="#services">Services</a>
       <a href="#about">About</a>
@@ -147,11 +154,10 @@
     <div class="hero-grid">
       <div>
         <div class="eyebrow">Independent Consultancy — Noordwijkerhout, NL</div>
-        <h1>Embedded electronics and FPGA design, delivered end to end.</h1>
-        <p>GF Engineering takes a board or an FPGA from architecture through bring-up and validation — as a fixed-scope build, or as hands-on support inside your team.</p>
+        <h1>Embedded systems, FPGA and high-speed PCB design for industrial and space electronics.</h1>
+        <p>Senior electronics engineering, from architecture and schematic capture through FPGA development, bring-up, and validation — as a fixed-scope build or hands-on support inside your team.</p>
         <div class="hero-ctas">
           <a class="btn" href="mailto:gonzalo.fernandez@gfengineering.nl">Start a project</a>
-          <a class="link-arrow" href="#services">See what we do ↓</a>
         </div>
       </div>
       <div class="hero-media">
@@ -159,56 +165,105 @@
       </div>
     </div>
   </div>
+</div>
 
-  <section id="services">
-    <div class="sec-head"><span class="sec-num mono">01</span><h2>What We Do</h2></div>
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head"><h2>What We Do</h2></div>
     <p class="sec-intro">Engaged for a single phase, or end to end from requirements through validated hardware.</p>
 
-    <div class="service-grid">
-      <div class="service-card">
-        <div class="service-num mono">01</div>
-        <h3>Hardware &amp; PCB Design</h3>
-        <p>High-speed, multilayer, mixed-signal boards — engineered SI/PI/EMC-aware from the first schematic.</p>
-        <div class="service-tools mono">Altium · OrCAD · Allegro · KiCad · HyperLynx</div>
+    <div class="services-layout">
+      <div class="service-grid">
+        <div class="service-card">
+          <h3>Hardware Development</h3>
+          <ul>
+            <li>Architecture definition and system design</li>
+            <li>High-integrity, high-speed PCB design (up to 18 layers)</li>
+            <li>Mixed-signal electronic systems</li>
+            <li>Signal/power integrity and EMC-aware design</li>
+          </ul>
+          <div class="service-tools mono">Altium · OrCAD/Allegro · KiCad · LTSpice · HyperLynx</div>
+        </div>
+        <div class="service-card">
+          <h3>Microcontroller, FPGA &amp; SoC</h3>
+          <ul>
+            <li>ARM-based embedded systems</li>
+            <li>FPGA/SoC design, integration and validation</li>
+            <li>VHDL development and test-benching</li>
+            <li>Control, DSP and custom digital interfaces</li>
+          </ul>
+          <div class="service-tools mono">Vivado · Vitis · PetaLinux · Libero SoC · ModelSim</div>
+        </div>
+        <div class="service-card">
+          <h3>Prototyping &amp; Integration</h3>
+          <ul>
+            <li>BOM management and component sourcing</li>
+            <li>PCB manufacturing and assembly coordination</li>
+            <li>In-house rework and visual inspection</li>
+            <li>Design of 3D-printed fixtures and test adapters</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <h3>Test &amp; Debug</h3>
+          <ul>
+            <li>Board bring-up and hardware/software integration</li>
+            <li>FPGA and SoC design validation</li>
+            <li>Debugging, troubleshooting, root-cause investigation</li>
+            <li>Automated test setups and GUIs</li>
+          </ul>
+          <div class="service-tools mono">LabVIEW · Python</div>
+        </div>
       </div>
-      <div class="service-card">
-        <div class="service-num mono">02</div>
-        <h3>FPGA &amp; SoC Design</h3>
-        <p>VHDL design across Xilinx and Microsemi platforms — from Zynq and Kria SoMs to ProASIC and PolarFire.</p>
-        <div class="service-tools mono">Vivado · Vitis · PetaLinux · Libero · ModelSim</div>
-      </div>
-      <div class="service-card">
-        <div class="service-num mono">03</div>
-        <h3>Prototyping &amp; Integration</h3>
-        <p>BOM and procurement, assembly, and the fixtures needed to bring a first board to life.</p>
-        <div class="service-tools mono">3D-printed fixtures · bring-up · BOM sourcing</div>
-      </div>
-      <div class="service-card">
-        <div class="service-num mono">04</div>
-        <h3>Test, Validation &amp; Debug</h3>
-        <p>A fully equipped lab — scopes, spectrum analyzer, protocol analyzers — with automated test.</p>
-        <div class="service-tools mono">LabVIEW · Python · automated test</div>
-      </div>
+      <img class="services-photo" src="images/services-pcb.jpg" alt="Close-up of a populated blue multilayer PCB">
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="about">
-    <div class="sec-head"><span class="sec-num mono">02</span><h2>About</h2></div>
+<section id="process" class="section-dark">
+  <div class="wrap">
+    <div class="sec-head"><h2>How We Work</h2></div>
+    <div class="process-note">
+      Independent technical execution, integrated with your engineering team — support at every phase, or only the ones you need.
+      <ul>
+        <li>Flexibility and speed across the full development cycle</li>
+        <li>Reduced development time and cost versus building the team in-house</li>
+      </ul>
+    </div>
+    <div class="process-flow mono">
+      <div class="process-step"><div class="t">System Requirements</div></div>
+      <div class="process-step"><div class="t">Architecture Definition</div></div>
+      <div class="process-step"><div class="t">System Design</div></div>
+      <div class="process-step"><div class="t">Schematics / PCB / FPGA / Firmware</div></div>
+      <div class="process-step"><div class="t">Bring-up &amp; Debugging</div></div>
+      <div class="process-step"><div class="t">Validation &amp; Testing</div></div>
+      <div class="process-step"><div class="t">Integration &amp; Support</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><h2>About</h2></div>
     <div class="about-grid">
       <img class="about-photo" src="images/about-portrait.jpg" alt="Gonzalo Fernandez at his electronics bench">
       <div class="about-bio">
-        <p>Gonzalo Fernandez founded GF Engineering after more than a decade as a senior embedded systems and FPGA engineer across the European space and high-tech industrial sectors.</p>
-        <p>Based in Noordwijkerhout — minutes from ESA's ESTEC — GF Engineering brings that same rigor to hardware and FPGA work for teams who need it done right the first time.</p>
-        <div class="stack-strip">
-          <div class="k mono">Stack</div>
-          <div class="v mono">VHDL · Vivado · Zynq / Kria SoM · Altium · HyperLynx · LabVIEW</div>
+        <p>Gonzalo Fernandez founded GF Engineering in 2021 after a decade as a senior embedded systems and electronics engineer across the European space and high-tech industrial sectors.</p>
+        <p>Based in Noordwijkerhout, minutes from ESA's ESTEC — most recently supporting on-board computer and data-handling systems for ESA/ESTEC programs, alongside independent consultancy work.</p>
+        <div class="timeline mono">
+          <div class="timeline-row"><span class="yr">2022–2026</span><span class="role">On-Board Computer &amp; Data Systems Engineer</span><span class="org">— Telespazio Belgium for ESA/ESTEC</span></div>
+          <div class="timeline-row"><span class="yr">2018–2021</span><span class="role">System &amp; Electronics Engineer</span><span class="org">— OHB System AG (MTG, CO2M)</span></div>
+          <div class="timeline-row"><span class="yr">2016–2018</span><span class="role">Electronics Engineer</span><span class="org">— Arquimea Ingeniería</span></div>
+          <div class="timeline-row"><span class="yr">2015–2018</span><span class="role">Embedded Systems Engineer</span><span class="org">— Power Smart Control</span></div>
+          <div class="timeline-row"><span class="yr">2011–2014</span><span class="role">Digital Electronics Design Engineer</span><span class="org">— Thales Alenia Space Spain</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="contact">
-    <div class="sec-head"><span class="sec-num mono">03</span><h2>Contact</h2></div>
+<section id="contact" class="section-dark">
+  <div class="wrap">
+    <div class="sec-head"><h2>Contact</h2></div>
     <div class="contact-grid">
       <div>
         <h2>Let's talk about your board.</h2>
@@ -229,15 +284,17 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
+<footer>
+  <div class="wrap">
     <div class="foot-row mono">
       <span class="l">GF Engineering — Noordwijkerhout, NL</span>
       <span class="r">gfengineering.nl</span>
     </div>
-  </footer>
-</div>
+  </div>
+</footer>
 
 </body>
 </html>
